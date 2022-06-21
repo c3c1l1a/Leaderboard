@@ -1,5 +1,80 @@
 @import './reset.css';
 
 body {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   background: bisque;
+  padding: 5% 10%;
+}
+
+header {
+  display: flex;
+}
+h1 {
+  font-size: 50px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+main {
+  display: flex;
+  gap:  10%;
+  justify-content: space-between;
+}
+
+main > section {
+  width: 50%;
+  padding: 20px;
+}
+
+.scores {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.scores-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scores-header button {
+  width: 200px;
+  height: 30px;
+  box-shadow: 2px 1px 10px 1px gray;
+}
+
+.scores-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: solid 2px black;
+  padding: 20px;
+}
+
+.add-score {
+  display: flex;
+  flex-direction: column;
+  gap:  20px;
+}
+
+.add-score-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap:  20px;
+}
+
+.add-score-form input {
+  width: 100%;
+  height: 30px;
+}
+
+.add-score-form button {
+  width: 200px;
+  height: 30px;
+  box-shadow: 2px 1px 10px 1px gray;
 }
