@@ -2,19 +2,20 @@
 
 # Project Name : Leaderboard
 
->   
+>   This project is a leaderboard created by consuming data from a RESTful API endpoint
 >
 >
 
 ## Built With
 
--
--
+- HTML, CSS, Javascript
+- Bundled with webpack
+- Gitflow and Github flow 
 
 
 ## Live Demo (Coming soon)
 
->
+
 
 ## Getting Started
 
