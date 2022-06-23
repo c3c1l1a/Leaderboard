@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage --watchAll",
     "build": "webpack --mode=development",
     "start": "webpack serve --open --mode=development",
     "watch": "webpack --watch"
@@ -32,6 +32,7 @@
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^28.1.1",
+    "jest-fetch-mock": "^3.0.3",
     "style-loader": "^3.3.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",

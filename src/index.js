@@ -2,4 +2,8 @@ import './css/style.css';
 import './index.html';
 
 
-import leaderBoard from './modules/leaderBoard';
+import Game from './modules/Game';
+
+const game = new Game('Coolest Game');
+game.creteNewGame();
+game.start();
