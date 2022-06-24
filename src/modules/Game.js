@@ -78,9 +78,9 @@ export default class {
       this.scores = localStorage.scores;
       if (localGame.scores.length > 0) refreshButton.style.display = 'flex';
       localGame.scores.forEach((item, index) => {
-        let gray = '';
-        if (index % 2 === 1) {
-          gray = 'gray';
+        let gray = `scores-${index}`;
+        if (index >= 4) {
+          gray = `scores-${4}`;
         }
 
         scoresList.innerHTML += `

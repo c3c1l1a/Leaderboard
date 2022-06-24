@@ -3,50 +3,51 @@
 body {
   display: flex;
   flex-direction: column;
-  gap: 50px;
-  background: bisque;
-  padding: 5% 10%;
+  justify-content: center;
   font-family: monospace, sans-serif;
 }
 
 header {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  background: #373c4a;
+  color: #fff;
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 30px;
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 18px;
 }
 
 main {
   display: flex;
-  gap: 10%;
-  justify-content: space-between;
-}
-
-main > section {
-  width: 50%;
-  padding: 20px;
+  gap: 50px;
+  flex-direction: column;
 }
 
 .scores {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .scores-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background: #373c4a;
+  color: #fff;
+  padding: 20px;
 }
 
 .scores-header a {
   display: none;
   justify-content: center;
-  width: 200px;
+  width: 100px;
   height: 30px;
   text-decoration: none;
   color: black;
@@ -62,12 +63,15 @@ main > section {
 .scores-list {
   display: flex;
   flex-direction: column;
-  border: solid 2px black;
   min-height: 30px;
+  background: orange;
 }
 
 .scores-list li {
-  font-size: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  color: #fff;
   padding: 10px 20px;
 }
 
@@ -78,14 +82,15 @@ main > section {
 .add-score {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+  padding: 20px;
 }
 
 .add-score-form {
   display: flex;
+  gap: 10px;
   flex-direction: column;
   align-items: flex-end;
-  gap: 20px;
 }
 
 .add-score-form input {
@@ -97,4 +102,37 @@ main > section {
   width: 200px;
   height: 30px;
   box-shadow: 2px 1px 10px 1px gray;
+}
+
+.scores-0 { background-color: #ff3a53 !important; }
+.scores-1 { background-color: #fa234d !important; }
+.scores-2 { background-color: #f0174b !important; }
+.scores-3 { background-color: #e50a4a !important; }
+.scores-4 { background-color: #d90047 !important; }
+
+@media (min-width: 768px) {
+  body {
+    height: 100vh;
+    justify-content: flex-start;
+  }
+
+  header {
+    height: 5vh;
+  }
+
+  main {
+    flex-direction: row;
+    justify-content: center;
+    height: 95vh;
+    background: #ff6668;
+    padding: 10%;
+  }
+
+  main > section {
+    width: 50%;
+  }
+
+  .scores-list li {
+    color: #fff;
+  }
 }
