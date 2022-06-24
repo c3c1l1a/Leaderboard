@@ -1,14 +1,10 @@
-import _ from 'lodash';
-import './style.css';
+import './css/style.css';
 import './index.html';
 
-function component() {
-  const element = document.createElement('div');
+import Game from './modules/Game.js';
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpak'], ' ');
-
-  return element;
-}
-
-document.body.appendChild(component());
+const game = new Game('Coolest Game');
+game.creteNewGame();
+game.addScore();
+game.refresh();
+game.domReload();
