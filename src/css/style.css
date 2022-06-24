@@ -6,6 +6,7 @@ body {
   gap: 50px;
   background: bisque;
   padding: 5% 10%;
+  font-family: monospace, sans-serif;
 }
 
 header {

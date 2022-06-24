@@ -2,11 +2,8 @@
 * @jest-environment jsdom
 */
 
-import Game from '../modules/Game';
 import fetchMock from 'jest-fetch-mock';
-
-
-
+import Game from '../modules/Game.js';
 
 fetchMock.enableMocks();
 const game = new Game('test Game');
@@ -61,43 +58,40 @@ document.body.innerHTML = `
           </form>
       </section>
   </main>
-`
+`;
 
-describe('Game', ()=> {
+describe('Game', () => {
   test('New game is created in leaderboard API', async () => {
-    fetch.mockResponseOnce(JSON.stringify({result: 'Game with ID: Zl4d7IVkemOTTVg2fUdz added.'}));
+    fetch.mockResponseOnce(JSON.stringify({ result: 'Game with ID: Zl4d7IVkemOTTVg2fUdz added.' }));
     await game.creteNewGame();
     expect(game.id).toEqual(JSON.parse(localStorage.getItem('game')).id);
   });
 
-  test('Add score to leaderboard API', async ()=> {
-    fetch.mockResponseOnce(JSON.stringify({result: 'Leaderboard score created correctly.'}));
+  test('Add score to leaderboard API', async () => {
+    fetch.mockResponseOnce(JSON.stringify({ result: 'Leaderboard score created correctly.' }));
     await game.addScore();
     expect(fetch).toHaveBeenCalledTimes(1);
   });
 
   test('Fetch scores from API using refresh button', async () => {
     fetch.mockResponseOnce(JSON.stringify({
-      "result": [
-          {
-              "user": "John Doe",
-              "score": 42
-          },
-          {
-              "user": "Peter Parker",
-              "score": 35
-          },
-          {
-              "user": "Wonder Woman",
-              "score": 50
-          }
-      ]
+      result: [
+        {
+          user: 'John Doe',
+          score: 42,
+        },
+        {
+          user: 'Peter Parker',
+          score: 35,
+        },
+        {
+          user: 'Wonder Woman',
+          score: 50,
+        },
+      ],
     }));
     await game.refresh();
     expect(game.scores[1].user).toEqual('Peter Parker');
     expect(game.scores[0].user).toEqual(JSON.parse(localStorage.getItem('game')).scores[0].user);
   });
-
 });
-
-
