@@ -19,7 +19,7 @@ document.body.innerHTML = `
       <section class="scores">
           <div class="scores-header">
               <h2>Resent scores</h2>
-              <a href="#">Refresh</a>    
+              <a class="refresh-button" href="#">Refresh</a>    
           </div>
           <ul class="scores-list">
               <li>
@@ -75,6 +75,29 @@ describe('Game', ()=> {
     await game.addScore();
     expect(fetch).toHaveBeenCalledTimes(1);
   });
+
+  test('Fetch scores from API using refresh button', async () => {
+    fetch.mockResponseOnce(JSON.stringify({
+      "result": [
+          {
+              "user": "John Doe",
+              "score": 42
+          },
+          {
+              "user": "Peter Parker",
+              "score": 35
+          },
+          {
+              "user": "Wonder Woman",
+              "score": 50
+          }
+      ]
+    }));
+    await game.refresh();
+    expect(game.scores[1].user).toEqual('Peter Parker');
+    expect(game.scores[0].user).toEqual(JSON.parse(localStorage.getItem('game')).scores[0].user);
+  });
+
 });
 
 

@@ -11,18 +11,14 @@ export default class {
 
     if (localGame === null){
 
-      const request = new Request(this.baseUrl+'games/', {
+      const response = await fetch(this.baseUrl+'games/', {
         method: 'POST',
         body: JSON.stringify({name: this.name}),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         } 
       });
-
-
-      const response = await fetch(request);
       const game = await response.json();
-
       this.id = game.result.match(/\b\w{20,}\b/)[0];
 
       localGame = {
@@ -37,26 +33,74 @@ export default class {
   async postNewScore(value){
     let localGame = JSON.parse(localStorage.getItem('game'));
     let endpoint = `games/${localGame.id}/scores/`;
-    const request = new Request(this.baseUrl+endpoint, {
+    await fetch(this.baseUrl+endpoint, {
       method: 'POST',
       body: JSON.stringify(value),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       } 
     });
+  }
 
-    await fetch(request);
+  async getAllScores(){
+    const localGame = JSON.parse(localStorage.getItem('game'));
+    const endpoint = `games/${localGame.id}/scores/`;
+    const response = await fetch(this.baseUrl+endpoint);
+    const scores = await response.json();
+
+    localGame.scores = scores.result;
+    localStorage.setItem('game', JSON.stringify(localGame));
   }
 
   addScore(){
     const form = document.querySelector('.add-score-form');
+    const refreshButton = document.querySelector('.refresh-button');
     form.addEventListener('submit', (e)=>{
       e.preventDefault();
       const score = new FormData(e.target);
       const value = Object.fromEntries(score.entries());
 
       this.postNewScore({user: value.name, score: value.score});
+      refreshButton.style.display = 'flex';
+      //refreshButton.style.display = 'flex'
       e.target.reset();
+    });
+  }
+
+  domReload(){
+    const scoresList = document.querySelector('.scores-list');
+    const refreshButton = document.querySelector('.refresh-button');
+
+    const localGame = JSON.parse(localStorage.getItem('game'));
+    scoresList.innerHTML = '';
+
+    if (localGame !== null){
+      if (localGame.scores.length > 0)
+        refreshButton.style.display = 'flex';
+      localGame.scores.forEach((item, index)=>{
+        let gray = '';
+        if (index % 2 == 1){
+          gray = 'gray';
+        } 
+
+        scoresList.innerHTML += `
+          <li class="${gray}">
+              <span>${item.user}</span>
+              <span>${item.score}</span>
+          </li>
+        `; 
+      });
+    }
+    
+  }
+
+  refresh(){
+    const refreshButton = document.querySelector('.refresh-button');
+    refreshButton.addEventListener('click', async (e)=> {
+      e.preventDefault();
+
+      await this.getAllScores();
+      this.domReload();
     });
   }
 }
