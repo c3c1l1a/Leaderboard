@@ -85,7 +85,7 @@ export default class {
 
         scoresList.innerHTML += `
           <li class="${gray}">
-              <span>${item.user}</span>
+              <span>${item.user}:</span>
               <span>${item.score}</span>
           </li>
         `;
